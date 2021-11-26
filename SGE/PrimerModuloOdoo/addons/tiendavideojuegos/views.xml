@@ -1,0 +1,280 @@
+<odoo>
+
+    <record model="ir.actions.act_window" id="juego_list_action">
+        <field name="name">juego</field>
+        <field name="res_model">juego</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="provincia_list_action">
+        <field name="name">provincia</field>
+        <field name="res_model">provincia</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="persona_list_action">
+        <field name="name">persona</field>
+        <field name="res_model">persona</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+        <record model="ir.actions.act_window" id="consola_list_action">
+        <field name="name">consola</field>
+        <field name="res_model">consola</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="empleado_list_action">
+        <field name="name">empleado</field>
+        <field name="res_model">empleado</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="cliente_list_action">
+        <field name="name">cliente</field>
+        <field name="res_model">cliente</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ventas_list_action">
+        <field name="name">ventas</field>
+        <field name="res_model">ventas</field>
+        <field name="view_mode">tree,form,calendar</field>
+    </record>
+        
+    
+
+    <menuitem name="Tienda de Videojuegos" id="tiendavideojuegos_menu_root"/>
+    
+    <menuitem name="Juego" id="tiendavideojuego_menu_juego" parent="tiendavideojuegos_menu_root"/>
+    <menuitem name="Empleado" id="tiendavideojuego_menu_empleado" parent="tiendavideojuegos_menu_root"/>
+    <menuitem name="Cliente" id="tiendavideojuego_menu_cliente" parent="tiendavideojuegos_menu_root"/>
+    <menuitem name="Consolas" id="tiendavideojuego_menu_consola" parent="tiendavideojuegos_menu_root"/>    
+    <menuitem name="Ventas" id="tiendavideojuego_menu_ventas" parent="tiendavideojuegos_menu_root"/> 
+    <menuitem name="Provincias" id="tiendavideojuego_menu_provincia" parent="tiendavideojuegos_menu_root"/> 
+    
+    
+    <menuitem name="listado de juegos" id="tiendavideojuego_list_juego" parent="tiendavideojuego_menu_juego"
+              action="juego_list_action"/>
+    <menuitem name="listado de empleados" id="tiendavideojuego_list_empleado" parent="tiendavideojuego_menu_empleado"
+              action="empleado_list_action"/>
+    <menuitem name="listado de clientes" id="tiendavideojuego_list_cliente" parent="tiendavideojuego_menu_cliente"
+              action="cliente_list_action"/>
+    <menuitem name="listado de consolas" id="tiendavideojuego_list_consola" parent="tiendavideojuego_menu_consola"
+              action="consola_list_action"/>
+    <menuitem name="listado de ventas" id="tiendavideojuego_list_ventas" parent="tiendavideojuego_menu_ventas"
+              action="ventas_list_action"/>
+    <menuitem name="listado de provincias" id="tiendavideojuego_list_provincia" parent="tiendavideojuego_menu_provincia"
+              action="provincia_list_action"/>
+    
+    
+        
+       
+        
+        <record model="ir.ui.view" id="juego_form_view">
+            <field name="name">juego.form</field>
+            <field name="model">juego</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de juegos">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="consola_id" />
+                            <field name="precio"/>
+                            <field name="iva"/>
+                            <field name="preciofinal"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="ventas_form_view">
+            <field name="name">ventas.form</field>
+            <field name="model">ventas</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de ventas">
+                    <sheet>
+                        <group>
+                            <field name="fechaventa" />
+                            <field name="juegos_ids" />
+                            <field name="clientes_ids" />
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="consola_form_view">
+            <field name="name">consola.form</field>
+            <field name="model">consola</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de consolas">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="precio"/>                           
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="empleado_form_view">
+            <field name="name">empleado.form</field>
+            <field name="model">empleado</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de empleados">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="apellidos" />
+                            <field name="dni" />
+                            <field name="provincia_id"/>
+                            <field name="genero"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="cliente_form_view">
+            <field name="name">cliente.form</field>
+            <field name="model">cliente</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de clientes">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="apellidos" />
+                            <field name="dni" />
+                            <field name="edad"/>
+                            <field name="nombrecompleto"/>
+                            <field name="provincia_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="provincia_form_view">
+            <field name="name">provincia.form</field>
+            <field name="model">provincia</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de provincia">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="juego_tree_view">
+            <field name="name">juego.tree</field>
+            <field name="model">juego</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de juegos">
+                    <field name="name"/>
+                    <field name="consola_id"/>
+                    <field name="precio"/>
+                    <field name="iva"/>
+                    <field name="preciofinal"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="ventas_tree_view">
+            <field name="name">ventas.tree</field>
+            <field name="model">ventas</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de ventas">
+                    <field name="fechaventa" />
+                    <field name="clientes_ids"/>
+                    <field name="juegos_ids"/>
+
+
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="cliente_tree_view">
+            <field name="name">cliente.tree</field>
+            <field name="model">cliente</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de clientes">
+                    <field name="name"/>
+                    <field name="apellidos"/>
+                    <field name="nombrecompleto"/>
+                    <field name="dni"/>
+                    <field name="edad"/>
+                    <field name="provincia_id"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="empleado_tree_view">
+            <field name="name">empleado.tree</field>
+            <field name="model">empleado</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de juegos">
+                    <field name="name"/>
+                    <field name="apellidos"/>
+                    <field name="dni"/>
+                    <field name="provincia_id"/>
+                    <field name="genero"/>
+
+                </tree>
+            </field>
+        </record>
+
+                <record model="ir.ui.view" id="consola_tree_view">
+            <field name="name">consola.tree</field>
+            <field name="model">consola</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de juegos">
+                    <field name="name"/>
+                    <field name="precio"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="provincia_tree_view">
+            <field name="name">provincia.tree</field>
+            <field name="model">provincia</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de provincias">
+                    <field name="name"/>
+
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="ventas_calendar_view">
+            <field name="name">ventas.calendar</field>
+            <field name="model">ventas</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario de " date_start="fechaventa">
+                    <field name="fechaventa"/>
+                    <field name="clientes_ids"/>
+                    <field name="juegos_ids"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="ventas_search_view">
+            <field name="name">ventas.search</field>
+            <field name="model">ventas</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="fechaventa"/>
+                </search>
+            </field>
+        </record>
+                  
+</odoo>
