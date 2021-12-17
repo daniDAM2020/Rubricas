@@ -16,7 +16,12 @@ class Juego(models.Model):
     preciofinal = fields.Integer(string="Precio final con IVA", required=True)
     ventas_ids = fields.Many2many('ventas', 'juegos_ventas_rel', 'juego_id', 'ventas_id',
                                   'Ventas')
-
+    MetaCritic = fields.Float(String="Nota MetaCritic", digits=(12, 2))
+    IGN = fields.Float(String="Nota IGN", digits=(12, 2))
+    Meristation = fields.Float(String="Nota Meristation", digits=(12, 2))
+    HobbyConsolas = fields.Float(String="Nota HobbyConsolas", digits=(12, 2))
+    LevelUP = fields.Float(String="Nota LevelUP", digits=(12, 2))
+    nota_media = fields.Float(String="Nota", compute='notamediavideojuegos')
 
     @api.onchange('precio', 'iva')
     def _onchange_price(self):
@@ -30,6 +35,12 @@ class Juego(models.Model):
                     'message': "Has modificado el campo IVA, escribe el valor del IVA actual",
                 }
             }
+    @api.depends('MetaCritic', 'IGN', 'Meristation', 'HobbyConsolas', 'LevelUP')              
+    def notamediavideojuegos(self):
+        for record in self:
+            record.nota_media = (record.MetaCritic + record.IGN + record.Meristation + record.HobbyConsolas +
+                              record.LevelUP) / 5
+
 
 class Ventas(models.Model):
     _name = 'ventas'
@@ -43,6 +54,7 @@ class Ventas(models.Model):
 class Persona(models.Model):
     _name = 'persona'
     dni = fields.Char(string="dni", required=True)
+    genero = fields.Selection([('0', 'hombre'),('1', 'mujer')])
 
     
 
@@ -53,11 +65,8 @@ class Empleado(models.Model):
     name = fields.Char(string="Nombre empleado", required=True)
     apellidos = fields.Char(string='Apellidos', required=True)
     provincia_id = fields.Many2one('provincia', string="Provincia")
-    genero = fields.Char(string="Genero", required=True)
     _sql_constraints = [('name', 'UNIQUE (name)',
                          'ya existe ese empleado')]
-    _sql_constraints = [('prueba9', "CHECK (genero = 'hombre')", 'Error: Solo masculino y femenino!')]
-
 class Cliente(models.Model):
     _inherit = 'persona'
     _name = 'cliente'
@@ -67,7 +76,7 @@ class Cliente(models.Model):
     edad = fields.Float('Edad', digits=(12, 1))
     provincia_id = fields.Many2one('provincia', string="Provincia")
     _sql_constraints = [('name', 'UNIQUE (name)',
-                         'ya existe ese empleado')]
+                         'ya existe ese cliente')]
     ventas_ids = fields.Many2many('ventas', 'clientes_ventas_rel', 'cliente_id', 'ventas_id',
                                   'Ventas')
 
@@ -81,6 +90,7 @@ class Cliente(models.Model):
         for record in self:
             if record.edad < 18:
                 raise ValidationError("No puede registrarse si no es mayor de edad: %s" % record.edad)
+                
 
 
 class Consola(models.Model):
@@ -96,8 +106,5 @@ class Provincia(models.Model):
     name = fields.Char(string="Nombre Provincia")
     empleado_id = fields.One2many('empleado', 'provincia_id', string="Empleados en la provincia")
     cliente_id = fields.One2many('cliente', 'provincia_id', string="Clientes en la provincia")
-
-
-
 
 
