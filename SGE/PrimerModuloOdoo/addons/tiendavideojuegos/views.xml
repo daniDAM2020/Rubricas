@@ -82,6 +82,11 @@
                             <field name="precio"/>
                             <field name="iva"/>
                             <field name="preciofinal"/>
+                            <field name="MetaCritic"/>
+                            <field name="IGN"/>
+                            <field name="Meristation"/>
+                            <field name="HobbyConsolas"/>
+                            <field name="LevelUP"/>
                         </group>
                     </sheet>
                 </form>
@@ -149,6 +154,7 @@
                             <field name="edad"/>
                             <field name="nombrecompleto"/>
                             <field name="provincia_id"/>
+                            <field name="genero"/>
                         </group>
                     </sheet>
                 </form>
@@ -180,6 +186,12 @@
                     <field name="precio"/>
                     <field name="iva"/>
                     <field name="preciofinal"/>
+                    <field name="MetaCritic"/>
+                    <field name="IGN"/>
+                    <field name="Meristation"/>
+                    <field name="HobbyConsolas"/>
+                    <field name="LevelUP"/>
+                    <field name="nota_media"/>
 
                 </tree>
             </field>
@@ -209,8 +221,9 @@
                     <field name="apellidos"/>
                     <field name="nombrecompleto"/>
                     <field name="dni"/>
-                    <field name="edad"/>
+                    <field name="edad" avg="Edad media de los clientes"/>
                     <field name="provincia_id"/>
+                    <field name="genero"/>
 
                 </tree>
             </field>
@@ -278,3 +291,4 @@
         </record>
                   
 </odoo>
+
