@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Daniel
+Build-Jdk: 16.0.2
+Implementation-Title: helloworld
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.chandana
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/helloworld/
+Created-By: Maven Integration for Eclipse
+
